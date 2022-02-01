@@ -28,7 +28,7 @@
                     <p class="ml-2 shrink-0 w-1/2"><?= $assign["description"] ?></p>
                     <form action="." method="post" class="w-[10%]">
                         <input type="hidden" name="action" value="delete_assignment">
-                        <input type="hidden" name="assignment_id" value="<?= $assignment["id"] ?>">
+                        <input type="hidden" name="assignment_id" value="<?= $assign["id"] ?>">
                         <button class="pl-6"><span aria-label="red cross emoji">❌</span></button>
                     </form>
             </div>
