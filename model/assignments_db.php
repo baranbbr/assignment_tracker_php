@@ -23,7 +23,7 @@ function get_assignments_by_course($course_id) {
     return $assignments;
 }
 
-function delete_assign($assignment_id) {
+function delete_assignment($assignment_id) {
     global $db;
     $query = 'DELETE FROM assignments
               WHERE id = :assignment_id';
