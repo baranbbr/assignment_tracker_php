@@ -1,14 +1,37 @@
 <?php
-$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-$cleardb_server = $cleardb_url["host"];
-$cleardb_username = $cleardb_url["user"];
-$cleardb_password = $cleardb_url["pass"];
-$cleardb_db = substr($cleardb_url["path"],1);
-$active_group = 'default';
-$query_builder = TRUE;
-// Connect to DB
+$dbstr = getenv('CLEARDB_DATABASE_URL');
+
+$dbstr = substr("$dbstr", 8);
+$dbstrarruser = explode(":", $dbstr);
+
+//Please don't look at these names. Yes I know that this is a little bit trash :D
+$dbstrarrhost = explode("@", $dbstrarruser[1]);
+$dbstrarrrecon = explode("?", $dbstrarrhost[1]);
+$dbstrarrport = explode("/", $dbstrarrrecon[0]);
+
+$dbpassword = $dbstrarrhost[0];
+$dbhost = $dbstrarrport[0];
+$dbport = $dbstrarrport[0];
+$dbuser = $dbstrarruser[0];
+$dbname = $dbstrarrport[1];
+
+unset($dbstrarrrecon);
+unset($dbstrarrport);
+unset($dbstrarruser);
+unset($dbstrarrhost);
+
+unset($dbstr);
+/*  //Uncomment this for debug reasons
+echo $dbname . " - name<br>";
+echo $dbhost . " - host<br>";
+echo $dbport . " - port<br>";
+echo $dbuser . " - user<br>";
+echo $dbpassword . " - passwd<br>";
+*/
+$dbanfang = 'mysql:host=' . $dbhost . ';dbname=' . $dbname;
+//You can only use this with the standard port!
 try {
-    $db = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+    $db = new PDO($dbanfang, $dbuser, $dbpassword);
 } catch (Exception $e) {
     $error = "Database Error: " . $e->getMessage();
     include "../view/error.php";
