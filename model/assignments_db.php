@@ -18,7 +18,7 @@ function get_assignments_by_course($course_id) {
         $stmt->bindValue(":course_id", $course_id);
     }
     $stmt->execute();
-    $assignments = $stmt->fetch_all();
+    $assignments = $stmt->fetchAll();
     $stmt->closeCursor();
     return $assignments;
 }

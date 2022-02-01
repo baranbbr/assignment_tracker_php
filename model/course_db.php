@@ -4,7 +4,7 @@ function get_courses() {
     $query = "SELECT * FROM courses ORDER BY course_id";
     $stmt = $db->prepare($query);
     $stmt->execute();
-    $courses = $stmt->fetch_all();
+    $courses = $stmt->fetchAll();
     $stmt->closeCursor();
     return $courses;
 }
