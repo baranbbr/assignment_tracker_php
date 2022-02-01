@@ -21,21 +21,18 @@
     </header>
     <?php if ($assignments) { ?>
         <?php foreach ($assignments as $assign): ?>
-            <div>
-                <div>
-                    <p class="font-bold"><?= $assign["course_name"] ?></p>
-                    <p><?= $assign["description"] ?></p>
-                </div>
-                <div>
-                    <form action="." method="post">
+            <div class="min-w-[0px] flex text-ellipsis leading-loose">
+                    <p class="font-bold text-ellipsis whitespace-nowrap overflow-hidden w-2/5">
+                        <?= $assign["course_name"] ?>
+                    </p>
+                    <p class="ml-2 shrink-0 w-1/2"><?= $assign["description"] ?></p>
+                    <form action="." method="post" class="w-[10%]">
                         <input type="hidden" name="action" value="delete_assignment">
-                        <input type="hidden" name="assignment_id" value="<?= $assignment[
-                            "id"
-                        ] ?>">
-                        <button class="remove-button">X</button>
+                        <input type="hidden" name="assignment_id" value="<?= $assignment["id"] ?>">
+                        <button class="pl-6"><span aria-label="red cross emoji">❌</span></button>
                     </form>
-                </div>
             </div>
+            <hr />
             <?php endforeach; ?>
             <?php } else {if ($course_id) { ?>
                 <p class="text-center">No assignments exist for this course yet.</p>
